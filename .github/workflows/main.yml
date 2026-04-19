@@ -1,0 +1,20 @@
+name: SSHX Run
+
+on:
+  workflow_dispatch: # Manuel tetikleme
+  push:
+    branches: [ main ]
+  schedule:
+    - cron: '*/30 * * * *' # Her 30 dakikada bir çalışır (opsiyonel)
+
+jobs:
+  sshx-run:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Install and run SSHX
+      run: |
+        curl -sSf https://sshx.io/get | sh -s run
